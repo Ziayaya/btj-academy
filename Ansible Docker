@@ -1,0 +1,22 @@
+1. inventory.yaml
+all:
+  vars:
+    docker_tag: latest
+  hosts:
+    btj-academy:
+      ansible_host: 10.184.0.100
+
+2. playbook.yaml
+- name: Coba container ubuntu Safira
+  hosts: btj-academy
+  become: true
+  tasks:
+  - docker_container:
+      name: ubuntu-ansible
+      image: "ubuntu:{{ docker_tag }}"
+      interactive: true
+      tty: true
+
+  - ansible.builtin.file:
+      path: /tmp/testing
+      state: touche
